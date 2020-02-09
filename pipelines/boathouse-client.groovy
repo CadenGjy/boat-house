@@ -9,7 +9,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                             userRemoteConfigs: [[url: 'https://github.com/CadenGjy/boat-house.git']]])
-                sh 'docker build -f boat-house/pipelines/client/web/Dockerfile -t tool.devopshub.cn:2020/idcps:test .'
+                sh 'docker build -f boat-house/client/web/Dockerfile -t tool.devopshub.cn:2020/idcps:test .'
             }
         }
         stage('Dev') { 
