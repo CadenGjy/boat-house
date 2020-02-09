@@ -8,10 +8,9 @@ pipeline {
             } 
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                            userRemoteConfigs: [[url: 'https://github.com/CadenGjy/boat-house.git']]])  
-                sh 'pwd'  
-                sh 'cd ./management/web'                                    
-                sh 'docker build -f Dockerfile -t tool.devopshub.cn:2020/idcps/management:test .'
+                            userRemoteConfigs: [[url: 'https://github.com/CadenGjy/boat-house.git']]])                                     
+                sh 'cd ./management/web
+                    docker build -f Dockerfile -t tool.devopshub.cn:2020/idcps/management:test .'
             }
         }
         stage('Dev') { 
