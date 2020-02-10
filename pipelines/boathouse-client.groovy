@@ -5,11 +5,12 @@ pipeline {
             agent 
             { 
                 label 'vm-slave' 
+                customWorkspace '/client/web'
             } 
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                            userRemoteConfigs: [[url: 'https://github.com/CadenGjy/boat-house.git']]])
-                sh 'docker build -f ./client/web/Dockerfile -t tool.devopshub.cn:2020/idcps/client:test .'
+                            userRemoteConfigs: [[url: 'https://github.com/CadenGjy/boat-house.git']]])                
+                sh 'docker build -f ./client/web/Dockerfile -t tool.devopshub.cn:2020/idcps/client:${env.BUILD_ID} .'
             }
         }
         stage('Dev') { 
@@ -18,7 +19,7 @@ pipeline {
                 label 'vm-slave' 
             }
             steps {
-                sh 'echo hello world! Dev!'
+                sh 'docker logins tool.devopshub.cn:2020 -u admin -p "admin"'
             }
         }
         stage('Test') { 
