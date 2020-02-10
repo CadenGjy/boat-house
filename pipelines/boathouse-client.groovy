@@ -4,8 +4,11 @@ pipeline {
         stage('Build') { 
             agent 
             { 
-                label 'vm-slave' 
-                customWorkspace '/client/web'
+                node{
+                    label 'vm-slave' 
+                    customWorkspace '/client/web'
+                }
+
             } 
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
